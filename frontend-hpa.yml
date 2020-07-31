@@ -2,7 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   creationTimestamp: null
-  name: nginx
+  name: frontend
   namespace: frontend-ns
 spec:
   maxReplicas: 10
@@ -10,5 +10,5 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: nginx
+    name: frontend
   targetCPUUtilizationPercentage: 50
