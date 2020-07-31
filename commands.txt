@@ -1,0 +1,26 @@
+# For cluster kubeconfig cred
+gcloud container clusters get-credentials cc-interview-sagar --zone asia-south1-a --project cc-interview-sandbox
+
+# create namespace
+kubectl create -f frontend-ns.yml
+kubectl create -f backend-ns.yml
+
+# Create deployments
+kubectl create -f frontend-deployment.yml
+kubectl create -f backend-deployment.yml
+
+# Create services
+kubectl create -f frontend-service.yml
+kubectl create -f backend-service.yml
+
+# Create frontend hpa
+kubectl create -f frontend-hpa.yml
+
+# Check HPA
+kubectl get hpa -n frontend-ns
+
+# Check frontend pods
+kubectl get pod -n frontend-ns
+
+# Check backend pods
+kubectl get pod -n backend-ns
