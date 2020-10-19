@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample
+spec:
+  selector:
+    app: sample
+    tier: sample
+  ports:
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+    nodePort: 30080
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample
+spec:
+  selector:
+    matchLabels:
+      app: sample
+      tier: sample
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sample
+        tier: sample
+        track: stable
+    spec:
+      containers:
+      - name: sample
+#        image: "anapsix/alpine-java"
+        image: "app:1.0"
+        imagePullPolicy: Never
+#        volumeMounts:
+#        - name: jar-volume
+#          mountPath: /opt/actuator-service.jar
+
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+#        command: ["java", "-jar", "/opt/actuator-service-0.0.1-SNAPSHOT.jar"]
+#        command: ["tail", "-f", "/dev/null"]
+#      volumes:
+#      - name: jar-volume
+#        hostPath:
+#          path: "C:/sagark/prometheus/gs-actuator-service"
