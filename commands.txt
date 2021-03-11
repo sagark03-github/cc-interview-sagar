@@ -24,3 +24,4 @@ kubectl get pod -n frontend-ns
 
 # Check backend pods
 kubectl get pod -n backend-ns
+
